@@ -1,0 +1,18 @@
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - uses: untillpro-test/air-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GOOS: windows
+        GOARCH: 386
+    - uses: actions/upload-artifact@v1
+      with:
+        name: air-action-test
+        path: air-action-test.exe
